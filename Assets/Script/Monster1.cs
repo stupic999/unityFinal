@@ -6,18 +6,18 @@ public class Monster1 : MonoBehaviour {
 
     public GameObject door;
     public GameObject monster1;
+    public GameObject bag;
     int once;
-	
-	// Update is called once per frame
-	void Update () {
-        if (GameController.isPause != true && GameController.bagIsOpen != true)
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (GetWords.gotU == true && GameController.GunDone == false && once == 0)
         {
-            if (GameController.GunDone == true && once == 0)
-            {
-                door.SetActive(false);
-                monster1.SetActive(true);
-                once++;
-            }
+            door.SetActive(false);
+            monster1.SetActive(true);
+            bag.SetActive(true);
+            once++;
         }
-	}
+    }
 }

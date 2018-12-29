@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MonsterController : MonoBehaviour
 {
+    public int Damage = 10;
+
     [System.Serializable]
     public class monsterStats
     {
@@ -40,5 +42,14 @@ public class MonsterController : MonoBehaviour
             Destroy(gameObject);
         }
         monsterHp.SetHealth(emyStat.currentHp, emyStat.maxHp);
+    }
+
+    void OnTriggerStay(Collider collision)
+    {
+        if (collision.tag == "Player")
+        {
+            PlayerController player = collision.GetComponent<PlayerController>();
+            player.DamagePlayer(Damage);
+        }
     }
 }
