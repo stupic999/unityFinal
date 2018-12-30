@@ -610,13 +610,26 @@ GameObject:
   m_Component:
   - component: {fileID: 71675968}
   - component: {fileID: 71675969}
+  - component: {fileID: 71675967}
   m_Layer: 0
   m_Name: GameController
-  m_TagString: Untagged
+  m_TagString: GM
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &71675967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 71675966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba1b85b4195c7564dbe89e4b5610f596, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastCheckPoint: {x: -8.539999, y: 0, z: -3.64}
 --- !u!4 &71675968
 Transform:
   m_ObjectHideFlags: 0
@@ -5913,6 +5926,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 764400ef192b082479fd20aba0642f0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogue:
+    name: "\u5929\u4E0A\u4F20\u6765\u4E00\u9635\u58F0\u97F3"
+    sentences:
+    - "\u6BCF\u6B21\u6B7B\u4EA1\u540E\uFF0C\u90FD\u4F1A\u5728\u4F60\u6700\u540E\u62FF\u5230\u7684\u5B57\u6BCD\u590D\u6D3B\u54DF~"
+    - "\u5F53\u4F60\u6B7B\u4E86\u4E09\u6B21\uFF0C\u5C31\u76F4\u63A5GameOver\u54AF\uFF0C\u52AA\u529B\u9003\u51FA\u53BB\u5427~"
   moveSpd: 3
   playerStat:
     maxHp: 100
@@ -11242,7 +11260,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1578573201}
   - component: {fileID: 1578573200}
-  - component: {fileID: 1578573202}
   m_Layer: 0
   m_Name: FristRoomController
   m_TagString: Untagged
@@ -11279,20 +11296,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1578573202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1578573199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0abd9a7b8a5d37344939c9ba62490d0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  door: {fileID: 1542723676}
-  monster1: {fileID: 2011269850}
-  bag: {fileID: 227176068}
 --- !u!1 &1598662286
 GameObject:
   m_ObjectHideFlags: 0
@@ -12356,6 +12359,7 @@ GameObject:
   - component: {fileID: 1733499983}
   - component: {fileID: 1733499982}
   - component: {fileID: 1733499981}
+  - component: {fileID: 1733499986}
   m_Layer: 0
   m_Name: U
   m_TagString: U
@@ -12449,6 +12453,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1733499986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1733499980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd1d5e8c38ec1b542b26a545dd77ac75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  door: {fileID: 1542723676}
+  monster1: {fileID: 2011269850}
+  bag: {fileID: 227176068}
 --- !u!1 &1749379449
 GameObject:
   m_ObjectHideFlags: 0
@@ -14297,7 +14315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e1789549abca94396bae4871bffc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 5
+  Damage: 50
   Word: {fileID: 1883601179298186, guid: 02d15df68c8a8ab449a48349d498b8ae, type: 2}
   emyStat:
     maxHp: 100

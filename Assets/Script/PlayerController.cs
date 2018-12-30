@@ -1,18 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 
+    public Dialogue dialogue;
+
+    // 移动
     Vector3 movement;
     public float moveSpd;
     Rigidbody playerRb;
+
+    // 死了几次
+    int dieTime;
 
     // 玩家被伤害后的无敌
     float invincibleTime;
     bool isInvincible;
     float timeSpentInvincible;
     Renderer playerRender;
+    CheckPoint loadCheckPoint;
+    
 
     [System.Serializable]
     public class playerStats
@@ -42,6 +51,7 @@ public class PlayerController : MonoBehaviour {
         playerHp.SetHealth(playerStat.currentHp, playerStat.maxHp);
         playerRb = GetComponent<Rigidbody>();
         playerRender = GetComponent<Renderer>();
+        loadCheckPoint = GameObject.FindGameObjectWithTag("GM").GetComponent<CheckPoint>();
     }
 
     void FixedUpdate()
@@ -94,8 +104,15 @@ public class PlayerController : MonoBehaviour {
             playerStat.currentHp -= damage;
             if (playerStat.currentHp <= 0)
             {
-                Destroy(gameObject);
-                GameController.gameOver = true;
+                playerStat.FullHp();
+                transform.position = loadCheckPoint.lastCheckPoint;
+                dieTime++;
+                FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+
+                if (dieTime >= 3)
+                {
+                    GameController.gameOver = true;
+                }
             }
             playerHp.SetHealth(playerStat.currentHp, playerStat.maxHp);
             invincibleTime = 1f;

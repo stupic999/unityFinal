@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ProtalToMainScene : MonoBehaviour {
 
+    CheckPoint saveCheckPoint;
+
     public Dialogue dialogue;
     public GameObject DialogController;
     public GameObject Player;
@@ -11,6 +13,11 @@ public class ProtalToMainScene : MonoBehaviour {
     public GameObject GameController;
     public GameObject MainCamare;
     public GameObject BagController;
+
+    private void Start()
+    {
+        saveCheckPoint = GameObject.FindGameObjectWithTag("GM").GetComponent<CheckPoint>();
+    }
 
     private void OnTriggerStay(Collider other)
     {
@@ -24,6 +31,7 @@ public class ProtalToMainScene : MonoBehaviour {
             DontDestroyOnLoad(MainCamare);
             DontDestroyOnLoad(BagController);
             Player.transform.position = new Vector3(0, 0, 0);
+            saveCheckPoint.lastCheckPoint = new Vector3(0, 0, 0);
         }
     }
 

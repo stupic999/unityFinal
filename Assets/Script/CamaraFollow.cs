@@ -13,7 +13,7 @@ public class CamaraFollow : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(GameController.gameOver==false)
+        if(GameController.gameOver==false && player!=null)
         transform.position=(new Vector3(player.transform.position.x, 10f, player.transform.position.z));
 	}
 }

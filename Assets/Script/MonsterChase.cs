@@ -9,7 +9,7 @@ public class MonsterChase : MonoBehaviour
     public NavMeshAgent agent;
     void Update()
     {
-        if (GameController.isPause != true && GameController.bagIsOpen != true && GameController.gameOver != true)
+        if (GameController.isPause != true && GameController.bagIsOpen != true && GameController.gameOver != true && destinationTarget!=null)
         {
             agent.enabled = true;
             agent.destination = destinationTarget.transform.position;
