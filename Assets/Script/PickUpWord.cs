@@ -25,7 +25,7 @@ public class PickUpWord : MonoBehaviour {
                 GetWords.gotU = true;
                 BagPage.bagOpen = true;
                 Tutorial.BagCantClose = true;
-                tutorial = GetComponent<Tutorial>();
+                tutorial = GetComponentInParent<Tutorial>();
                 tutorial.monster1In();
             }
             if (transform.tag == "B")

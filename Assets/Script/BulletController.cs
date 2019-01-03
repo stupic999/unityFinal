@@ -14,7 +14,7 @@ public class BulletController : MonoBehaviour {
         {
             surviveTime += Time.deltaTime;
 
-            transform.Translate(Vector3.forward * Time.deltaTime * bulletSpd, Space.Self);
+            transform.Translate(Vector3.forward * Time.deltaTime * bulletSpd, Space.Self);  
 
             if (surviveTime >= destroyTime)
             {
