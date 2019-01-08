@@ -121,6 +121,7 @@ public class BowWord : MonoBehaviour {
     {
         if (word[0] == "B" && word[1] == "O" && word[2] == "W")
         {
+            audioController.WeopenDone = true;
             GameController.BowDone = true;
             BowUI.SetActive(true);
             BowDone.SetActive(true);

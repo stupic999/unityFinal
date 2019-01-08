@@ -8,15 +8,15 @@ public class PlayerController : MonoBehaviour {
     public Dialogue dialogue;
 
     public Animator playerAnim;
-
+    
     // 移动
     Vector3 movement;
     public float moveSpd;
     Rigidbody playerRb;
 
     // 玩家被伤害后的无敌
-    float invincibleTime;
-    bool isInvincible;
+    public float invincibleTime;
+    public  bool isInvincible;
     float timeSpentInvincible;
     Renderer playerRender;    
 
@@ -42,8 +42,13 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private PlayerHp playerHp;
 
+    public AudioClip PlayerAtkedSound;
+    public GameObject PlayerWalkSound;
+    AudioSource audioSource;
+
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         playerStat.FullHp();
         playerHp.SetHealth(playerStat.currentHp, playerStat.maxHp);
         playerRb = GetComponent<Rigidbody>();
@@ -51,7 +56,15 @@ public class PlayerController : MonoBehaviour {
     }
 
     void FixedUpdate()
-    {
+    {     
+        // 作弊
+        if (Input.GetKey(KeyCode.F4))
+        {
+            playerStat.maxHp = 10000;
+            playerStat.FullHp();
+            playerHp.SetHealth(playerStat.currentHp, playerStat.maxHp);
+        }
+
         if (GameController.isLoadHp == true)
         {
             playerStat.currentHp = GameController.playerHp;
@@ -88,9 +101,13 @@ public class PlayerController : MonoBehaviour {
             float v = Input.GetAxisRaw("Vertical");
             Move(h, v);
         }
+        else
+        {
+            PlayerWalkSound.SetActive(false);
+        }
     }
 
-    public void Move(float h,float v)
+    public void Move(float h, float v)
     {
         movement.Set(h, 0, v);
 
@@ -101,28 +118,36 @@ public class PlayerController : MonoBehaviour {
         if (h != 0 || v != 0)
         {
             playerAnim.SetBool("isMove", true);
+            PlayerWalkSound.SetActive(true);
         }
         else
+        {
             playerAnim.SetBool("isMove", false);
+            PlayerWalkSound.SetActive(false);
+        }            
     }
 
     public void DamagePlayer(int damage)
     {
         if (invincibleTime <= 0)
         {
+            audioSource.PlayOneShot(PlayerAtkedSound);
             playerStat.currentHp -= damage;
             if (playerStat.currentHp <= 0)
             {
-                playerStat.FullHp();
-                transform.position = GameController.lastCheckPoint;
+                audioController.PlayerDie = true;
                 GameController.dieTime++;
-                FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
-
                 if (GameController.dieTime >= 3)
                 {
                     GameController.gameOver = true;
                 }
-            }
+                else
+                {
+                    playerStat.FullHp();
+                    transform.position = GameController.lastCheckPoint;
+                    FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+                }                
+            }            
             playerHp.SetHealth(playerStat.currentHp, playerStat.maxHp);
             GameController.playerHp = playerStat.currentHp;
             invincibleTime = 1f;

@@ -153,6 +153,7 @@ public class IronWord : MonoBehaviour {
     {
         if (word[0] == "I" && word[1] == "R" && word[2] == "O" && word[3] == "N")
         {
+            audioController.WeopenDone = true;
             GameController.IronDone = true;
             IronUI.SetActive(true);
             IronDone.SetActive(true);

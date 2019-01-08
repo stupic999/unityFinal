@@ -38,6 +38,11 @@ public class BulletController : MonoBehaviour {
                 MonsterWordController emy = collision.GetComponent<MonsterWordController>();
                 emy.DamageEmy(damage);
             }
+            else if (collision.tag == "Boss")
+            {
+                BossController emy = collision.GetComponent<BossController>();
+                emy.DamageEmy(damage);
+            }
         }
     }
 }

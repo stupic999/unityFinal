@@ -7,6 +7,11 @@ public class ChangeRoom : MonoBehaviour {
 
         CheckPoint saveCheckPoint;
 
+    public static void GoToStart()
+    {
+        SceneManager.LoadScene("Start");
+    }
+
     public static void GoToFirstRoom()
     {
         SceneManager.LoadScene("FirstRoom");
@@ -15,11 +20,6 @@ public class ChangeRoom : MonoBehaviour {
     public static void GoToMainRoom()
     {
         SceneManager.LoadScene("MainRoom");
-    }
-
-    public static void GoToGameOver()
-    {
-        SceneManager.LoadScene("GameOver");
     }
 
     public static void GoToBossRoom()

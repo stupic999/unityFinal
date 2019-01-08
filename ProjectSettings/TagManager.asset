@@ -18,6 +18,8 @@ TagManager:
   - Bullet
   - Search
   - MainRoomPortal
+  - Boss
+  - EmyBullet
   layers:
   - Default
   - TransparentFX

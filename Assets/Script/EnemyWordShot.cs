@@ -9,10 +9,13 @@ public class EnemyWordShot : MonoBehaviour {
     public GameObject enemyBullet;
     public Transform shotSpawn;
     MonsterChase monsterChase;
+    public AudioClip shotSound;
+    AudioSource audioSource;
 
     private void Start()
     {
         monsterChase = GetComponent<MonsterChase>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -24,6 +27,7 @@ public class EnemyWordShot : MonoBehaviour {
 
             if (FireCD >= NextFire)
             {
+                audioSource.PlayOneShot(shotSound);
                 Shot();
                 FireCD = 0;
             }

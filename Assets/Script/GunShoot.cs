@@ -10,6 +10,16 @@ public class GunShoot : MonoBehaviour {
     float NextFire = 0.3f;
     float FireCD;
 
+    public AudioClip GunSound;
+    AudioSource audioSource;
+
+    // Use this for initialization
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
+
     void Update()
     {
         if (WeopenController.useWhatWeopen==1)
@@ -30,6 +40,7 @@ public class GunShoot : MonoBehaviour {
 
     public void Effect()
     {
+        audioSource.PlayOneShot(GunSound);
         Instantiate(bullet, gun.position, gun.rotation);
     }
 }

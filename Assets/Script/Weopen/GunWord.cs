@@ -131,6 +131,7 @@ public class GunWord : MonoBehaviour {
     {
         if (word[0] == "G" && word[1] == "U" && word[2] == "N" && GameController.GunDone==false)
         {
+            audioController.WeopenDone = true;
             GameController.GunDone = true;
             GunUI.SetActive(true);
             FindObjectOfType<DialogueManager>().StartDialogue(dialogue);            

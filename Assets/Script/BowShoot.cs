@@ -13,7 +13,16 @@ public class BowShoot : MonoBehaviour
     float NextFire = 0.75f;
     float FireCD;
 
-    void Update()
+    public AudioClip BowSound;
+    AudioSource audioSource;
+
+    // Use this for initialization
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
+        void Update()
     {
         if (GameController.BowDone==true)
             {
@@ -33,6 +42,7 @@ public class BowShoot : MonoBehaviour
 
     public void Effect()
     {
+        audioSource.PlayOneShot(BowSound);
         Instantiate(bullet, bowFirePoint1.position, bowFirePoint1.rotation);
         Instantiate(bullet, bowFirePoint2.position, bowFirePoint2.rotation);
         Instantiate(bullet, bowFirePoint3.position, bowFirePoint3.rotation);

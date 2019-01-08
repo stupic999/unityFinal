@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class ProtalToBossScene : MonoBehaviour
 {
-
-    public Dialogue dialogue;
     public GameObject Controller;
     public GameObject Player;
     public Camera MainCamare;

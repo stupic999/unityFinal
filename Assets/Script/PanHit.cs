@@ -13,6 +13,14 @@ public class PanHit : MonoBehaviour
 
     public Animator playerAnim;
 
+    public AudioClip PanSound;
+    AudioSource audioSource;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     void Update()
     {
         if (Hit == true)
@@ -31,6 +39,7 @@ public class PanHit : MonoBehaviour
                 }
                 if (Input.GetMouseButton(0) && FireCD >= NextFire)
                 {
+                    audioSource.PlayOneShot(PanSound);
                     playerAnim.SetBool("Hit", true);
                     Hit = true;
                     FireCD = 0;                    
@@ -48,11 +57,11 @@ public class PanHit : MonoBehaviour
                 if (other.tag == "Emy")
                 {
                     if (Hit == true)
-                    {                        
+                    {
+                        playerAnim.SetBool("Hit", false);
                         MonsterController emy = other.GetComponent<MonsterController>();
                         emy.DamageEmy(damage);
-                        Hit = false;
-                        playerAnim.SetBool("Hit", false);
+                        Hit = false;                        
                     }
                 }
                 else if (other.tag == "EmyWord")
@@ -62,7 +71,17 @@ public class PanHit : MonoBehaviour
                         playerAnim.SetBool("Hit", false);
                         MonsterWordController emy = other.GetComponent<MonsterWordController>();
                         emy.DamageEmy(damage);
-                        Hit = false;                        
+                        Hit = false;
+                    }
+                }
+                else if (other.tag == "Boss")
+                {
+                    if (Hit == true)
+                    {
+                        playerAnim.SetBool("Hit", false);
+                        BossController emy = other.GetComponent<BossController>();
+                        emy.DamageEmy(damage);
+                        Hit = false;
                     }
                 }
             }

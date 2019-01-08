@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MonsterWordController : MonoBehaviour {
 
+    public AudioClip AtkedSound;
+    public AudioClip AtkSound;
+    AudioSource audioSource;
     public int Damage = 10;
     public GameObject Word;
     public bool Alive = true;
@@ -37,6 +40,7 @@ public class MonsterWordController : MonoBehaviour {
         emyStat.FullHp();
         monsterHp.SetHealth(emyStat.currentHp, emyStat.maxHp);
         monsterSearch = GetComponentInParent<MonsterSearch>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -57,6 +61,7 @@ public class MonsterWordController : MonoBehaviour {
 
     public void DamageEmy(int damage)
     {
+        audioSource.PlayOneShot(AtkedSound);
         emyStat.currentHp -= damage;
         if (emyStat.currentHp <= 0)
         {
@@ -88,8 +93,12 @@ public class MonsterWordController : MonoBehaviour {
         {
             if (collision.tag == "Player")
             {
-                PlayerController player = collision.GetComponent<PlayerController>();
-                player.DamagePlayer(Damage);
+                PlayerController playerController = collision.GetComponent<PlayerController>();
+                if (playerController.isInvincible == false)
+                {
+                    audioSource.PlayOneShot(AtkSound);
+                    playerController.DamagePlayer(Damage);
+                }
             }
         }
     }

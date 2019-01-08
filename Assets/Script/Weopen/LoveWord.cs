@@ -153,6 +153,7 @@ public class LoveWord : MonoBehaviour {
     {
         if (word[0] == "L" && word[1] == "O" && word[2] == "V" && word[3] == "E") 
         {
+            audioController.WeopenDone = true;
             GameController.LoveDone = true;
             LoveUI.SetActive(true);
             LoveDone.SetActive(true);

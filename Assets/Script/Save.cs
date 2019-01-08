@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class Save
 {
+    public float LoveFireCD;
+
     public float PlayerPositionX;
     public float PlayerPositionZ;
     public float PlayerRotationY;
@@ -46,8 +48,6 @@ public class Save
     public bool FirstRoomPortalDone;
 
     public int playerHp;
-
-    //  public Vector3 lastCheckPoint;
 
     public int MonsterTHp;
     public float MonsterTPositionX;
@@ -182,10 +182,4 @@ public class Save
     public bool Monster15Found;
     public bool Monster16Found;
     public bool Monster17Found;
-
-    // public List<int> MonsterHp = new List<int>();
-
-    /*
-    public List<int> livingMonsterTypes = new List<int>();
-    */
 }

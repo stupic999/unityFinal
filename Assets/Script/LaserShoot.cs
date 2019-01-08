@@ -6,9 +6,16 @@ public class LaserShoot : MonoBehaviour {
 
     public GameObject bullet;
     public Transform laser;
-    int damage = 5;
     float NextFire = 0.1f;
     float FireCD;
+
+    public AudioClip LaserSound;
+    AudioSource audioSource;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     void Update()
     {
@@ -30,6 +37,7 @@ public class LaserShoot : MonoBehaviour {
 
     public void Effect()
     {
+        audioSource.PlayOneShot(LaserSound);
         Instantiate(bullet, laser.position, laser.rotation);
     }
 }

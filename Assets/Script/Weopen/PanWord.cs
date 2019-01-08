@@ -123,6 +123,7 @@ public class PanWord : MonoBehaviour {
     {
         if (word[0] == "P" && word[1] == "A" && word[2] == "N")
         {
+            audioController.WeopenDone = true;
             GameController.PanDone = true;
             PanUI.SetActive(true);
             PanDone.SetActive(true);

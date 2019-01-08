@@ -54,6 +54,7 @@ public class PickUpWord : MonoBehaviour {
     {
         if (collision.tag == "Player")
         {
+            audioController.GotWord = true;
             GameController.lastCheckPoint = transform.position;
             FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
             Destroy(gameObject);

@@ -13,9 +13,24 @@ public class LoveHeal : MonoBehaviour {
     public Image LovePic;
     float FireCD=60;
 
-    void Update()
+    public AudioClip LoveSound;
+    AudioSource audioSource;
+
+    // Use this for initialization
+    void Start()
     {
-        LovePic.fillAmount = FireCD / 60;
+        audioSource = GetComponent<AudioSource>();
+    }
+
+        void Update()
+    {
+        LovePic.fillAmount = FireCD / 60;       
+        if (GameController.LoadLoveCD == true)
+        {
+            FireCD = GameController.LoveFireCD;
+            GameController.LoadLoveCD = false;
+        }
+        GameController.LoveFireCD = FireCD;
 
         if (FireCD == 0)
         {
@@ -32,6 +47,7 @@ public class LoveHeal : MonoBehaviour {
                 {
                     if (Input.GetMouseButton(0) && FireCD >= NextFire)
                     {
+                        audioSource.PlayOneShot(LoveSound);
                         FireCD = 0;
                         PlayerController player = Player.GetComponent<PlayerController>();
                         player.HealPlayer(heal);

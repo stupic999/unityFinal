@@ -6,6 +6,20 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class GameController : MonoBehaviour {
 
+    public static float LoveFireCD;
+    public static bool LoadLoveCD;
+
+    AudioSource audioSource;
+
+    public AudioClip BossDie;
+    public AudioClip GameOverSound;
+
+    public GameObject GameOverUI;
+
+    public static bool Win;
+
+    public GameObject WinUI;
+
     public GameObject WordB;
     public GameObject WordR;
 
@@ -181,6 +195,11 @@ public class GameController : MonoBehaviour {
     public static int playerHp=100;
     public static bool isLoadHp;
 
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     void Update () {
 
         if (scene == 1)
@@ -217,7 +236,7 @@ public class GameController : MonoBehaviour {
             live3.SetActive(false);
         }
 
-        // 作弊键
+        // 作弊
         if (Input.GetKey(KeyCode.F4))
         {
             GunDone = true;
@@ -263,7 +282,18 @@ public class GameController : MonoBehaviour {
 
         if (gameOver == true)
         {
-            ChangeRoom.GoToGameOver();
+            GameOverUI.SetActive(true);
+            isPause = true;
+            gameOver = false;
+            audioSource.PlayOneShot(GameOverSound);
+        }
+
+        if (Win == true)
+        {
+            audioSource.PlayOneShot(BossDie);
+            WinUI.SetActive(true);
+            isPause = true;
+            Win = false;
         }
 
         if (isPause == true || bagIsOpen == true || isMenu==true)
@@ -278,17 +308,26 @@ public class GameController : MonoBehaviour {
 
     public void SaveGame()
     {
-        Save save = CreateSaveGameObject();
+        if (scene == 2)
+        {
+            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+        }
+        else
+        {
+            Save save = CreateSaveGameObject();
 
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/gamesave.save");
-        bf.Serialize(file, save);
-        file.Close();
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Create(Application.persistentDataPath + "/gamesave.save");
+            bf.Serialize(file, save);
+            file.Close();
+        }
     }
 
     private Save CreateSaveGameObject()
     {
         Save save = new Save();
+
+        save.LoveFireCD = LoveFireCD;
 
         save.PlayerPositionX = Player.transform.position.x;
         save.PlayerPositionZ = Player.transform.position.z;
@@ -464,11 +503,10 @@ public class GameController : MonoBehaviour {
         save.Monster17RotationY = Monster17.transform.rotation.y;
         save.Monster17Alive = monster17.GetComponent<MonsterController>().Alive;
         save.Monster17Found = Monster17Found;
-    
-        //   save.lastCheckPoint = lastCheckPoint;
 
         return save;
     }
+    
 
     public void LoadGame()
     {
@@ -480,6 +518,9 @@ public class GameController : MonoBehaviour {
             file.Close();
             Player.transform.position = new Vector3(save.PlayerPositionX, 0, save.PlayerPositionZ);
             Player.transform.rotation = new Quaternion(0, save.PlayerRotationY, 0, 0);
+
+            LoveFireCD = save.LoveFireCD;
+            LoadLoveCD = true;
 
             GunDone = save.GunDone;
             BowDone = save.BowDone;
@@ -851,8 +892,6 @@ public class GameController : MonoBehaviour {
                 Monster17.transform.position = new Vector3(save.Monster17PositionX, 0, save.Monster17PositionZ);
                 Monster17.transform.rotation = Quaternion.LookRotation(Player.transform.position);
             }           
-
-            //    lastCheckPoint = save.lastCheckPoint;
 
             if (save.scene == 0 && scene != 0)
             {

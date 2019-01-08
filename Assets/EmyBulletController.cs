@@ -26,7 +26,7 @@ public class EmyBulletController : MonoBehaviour {
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.tag != "Emy"&& collision.tag!="EmyWord"  && collision.tag != "Search")
+        if (collision.tag != "Emy"&& collision.tag!="EmyWord"  && collision.tag != "Search" && collision.tag!="Boss")
         {
             Destroy(gameObject);
             if (collision.tag == "Player")

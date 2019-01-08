@@ -188,6 +188,7 @@ public class LaserWord : MonoBehaviour {
     {
         if (word[0] == "L" && word[1] == "A" && word[2] == "S" && word[3] == "E" && word[4]=="R")
         {
+            audioController.WeopenDone = true;
             GameController.LaserDone = true;
             LaserUI.SetActive(true);
             LaserDone.SetActive(true);

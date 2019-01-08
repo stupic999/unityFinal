@@ -217,7 +217,7 @@ public class WeopenController : MonoBehaviour
             }
             if (GameController.LaserDone == true)
             {
-                if (Input.GetKeyDown(KeyCode.Alpha6))
+                if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Alpha6))
                 {
                     useWhatWeopen = 6;
                 }
