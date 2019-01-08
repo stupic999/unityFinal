@@ -12,9 +12,9 @@ public class LaserShoot : MonoBehaviour {
 
     void Update()
     {
-        if (GameController.LaserDone == true)
-        {
-            if (GameController.isPause != true && GameController.bagIsOpen != true)
+        if (WeopenController.useWhatWeopen == 6)
+            {
+            if (GameController.isPause != true && GameController.isMenu != true && GameController.bagIsOpen != true)
             {
                 if (FireCD < NextFire)
                     FireCD += Time.deltaTime;

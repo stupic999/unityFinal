@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class LoveWord : MonoBehaviour {
 
+    public Dialogue dialogue;
+
+    public GameObject LoveUI;
+
     string[] word = new string[4] { "", "", "", "" };
 
     public GameObject L;
@@ -14,16 +18,26 @@ public class LoveWord : MonoBehaviour {
     public GameObject Box2;
     public GameObject Box3;
     public GameObject Box4;
-    /*
+    Vector3 lPos;
+    Vector3 oPos;
+    Vector3 vPos;
+    Vector3 ePos;
     public GameObject LoveDone;
     public GameObject LoveWordSide;
-    */
 
     // 字母放对地方就会true
     bool Lin;
     bool Oin;
     bool Vin;
     bool Ein;
+
+    private void Start()
+    {
+        lPos = L.transform.position;
+        oPos = O.transform.position;
+        vPos = V.transform.position;
+        ePos = E.transform.position;
+    }
 
     public void clickOnL()
     {
@@ -33,7 +47,7 @@ public class LoveWord : MonoBehaviour {
             if (word[i] == "L")
             {
                 word[i] = "";
-                L.transform.position = new Vector2(418.6f, 111.2f);
+                L.transform.position =lPos;
                 Lin = false;
                 break;
             }
@@ -43,7 +57,7 @@ public class LoveWord : MonoBehaviour {
                 word[i] = "L";
                 Lin = true;
                 BoxIn(i, L);
-                LoveDone();
+                loveDone();
                 break;
             }
         }
@@ -56,7 +70,7 @@ public class LoveWord : MonoBehaviour {
             if (word[i] == "O")
             {
                 word[i] = "";
-                O.transform.position = new Vector2(646.9f, 111.2f);
+                O.transform.position = oPos;
                 Oin = false;
                 break;
             }
@@ -65,7 +79,7 @@ public class LoveWord : MonoBehaviour {
                 word[i] = "O";
                 BoxIn(i, O);
                 Oin = true;
-                LoveDone();
+                loveDone();
                 break;
             }
         }
@@ -78,7 +92,7 @@ public class LoveWord : MonoBehaviour {
             if (word[i] == "V")
             {
                 word[i] = "";
-                V.transform.position = new Vector2(875.2f, 111.2f);
+                V.transform.position = vPos;
                 Vin = false;
                 break;
             }
@@ -87,7 +101,7 @@ public class LoveWord : MonoBehaviour {
                 word[i] = "V";
                 BoxIn(i, V);
                 Vin = true;
-                LoveDone();
+                loveDone();
                 break;
             }
         }
@@ -100,7 +114,7 @@ public class LoveWord : MonoBehaviour {
             if (word[i] == "E")
             {
                 word[i] = "";
-                E.transform.position = new Vector2(1103.5f, 111.2f);
+                E.transform.position = ePos;
                 Ein = false;
                 break;
             }
@@ -109,7 +123,7 @@ public class LoveWord : MonoBehaviour {
                 word[i] = "E";
                 BoxIn(i, E);
                 Ein = true;
-                LoveDone();
+                loveDone();
                 break;
             }
         }
@@ -135,15 +149,16 @@ public class LoveWord : MonoBehaviour {
         }
     }
 
-    void LoveDone()
+    void loveDone()
     {
         if (word[0] == "L" && word[1] == "O" && word[2] == "V" && word[3] == "E") 
         {
-            Debug.Log("LoveDone");
-            /*
+            GameController.LoveDone = true;
+            LoveUI.SetActive(true);
             LoveDone.SetActive(true);
-            Destroy(LoveWordSide);
-            */
+            LoveWordSide.SetActive(false);
+            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+            BagPage.lovePhare = 2;
         }
     }
 }

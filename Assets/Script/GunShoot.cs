@@ -12,9 +12,9 @@ public class GunShoot : MonoBehaviour {
 
     void Update()
     {
-        if (GameController.GunDone == true)
+        if (WeopenController.useWhatWeopen==1)
         {
-            if (GameController.isPause != true && GameController.bagIsOpen != true)
+            if (GameController.isPause != true && GameController.isMenu != true && GameController.bagIsOpen != true)
             {
                 if (FireCD < NextFire)
                     FireCD += Time.deltaTime;

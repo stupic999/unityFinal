@@ -5,12 +5,12 @@ using UnityEngine;
 public class BulletController : MonoBehaviour {
 
     public float bulletSpd = 1f;
-    float destroyTime=2;
+    float destroyTime=200;
     float surviveTime;
     public int damage = 10;
 
     void Update () {
-        if (GameController.isPause != true && GameController.bagIsOpen!=true)
+        if (GameController.isPause != true && GameController.isMenu != true && GameController.bagIsOpen != true)
         {
             surviveTime += Time.deltaTime;
 
@@ -25,7 +25,7 @@ public class BulletController : MonoBehaviour {
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.tag != "Player")
+        if (collision.tag != "Player" && collision.tag!="Search")
         {
             Destroy(gameObject);
             if (collision.tag == "Emy")

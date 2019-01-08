@@ -4,34 +4,30 @@ using UnityEngine;
 
 public class ProtalToMainScene : MonoBehaviour {
 
-    CheckPoint saveCheckPoint;
-
     public Dialogue dialogue;
-    public GameObject DialogController;
+    public GameObject Controller;
     public GameObject Player;
-    public GameObject Bag;
-    public GameObject GameController;
-    public GameObject MainCamare;
-    public GameObject BagController;
-
-    private void Start()
-    {
-        saveCheckPoint = GameObject.FindGameObjectWithTag("GM").GetComponent<CheckPoint>();
-    }
+    public Camera MainCamare;
+    public GameObject MonsterRoot;
+    public GameObject UI;
+    public GameObject MonsterTSearch;
 
     private void OnTriggerStay(Collider other)
     {
         if (Tutorial.Bdone == true && other.tag == "Player")
         {
             ChangeRoom.GoToMainRoom();
-            DontDestroyOnLoad(DialogController);
+            DontDestroyOnLoad(Controller);
             DontDestroyOnLoad(Player);
-            DontDestroyOnLoad(Bag);
-            DontDestroyOnLoad(GameController);
             DontDestroyOnLoad(MainCamare);
-            DontDestroyOnLoad(BagController);
-            Player.transform.position = new Vector3(0, 0, 0);
-            saveCheckPoint.lastCheckPoint = new Vector3(0, 0, 0);
+            MainCamare.orthographicSize = 5;
+            DontDestroyOnLoad(UI);
+            DontDestroyOnLoad(MonsterRoot);
+            Player.transform.position = new Vector3(-48, 0, -23);
+            GameController.lastCheckPoint = new Vector3(0, 0, 0);
+            DontDestroyOnLoad(MonsterTSearch);
+            GameController.scene = 1;
+            MonsterRoot.SetActive(true);
         }
     }
 

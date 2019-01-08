@@ -8,15 +8,21 @@ public class IronShield : MonoBehaviour {
 
     private void OnTriggerStay(Collider other)
     {
-        if (GameController.IronDone == true)
-        {
-           if (GameController.isPause != true && GameController.bagIsOpen != true)
+        if (WeopenController.useWhatWeopen == 4)
+            {
+            if (GameController.isPause != true && GameController.isMenu != true && GameController.bagIsOpen != true)
             {
                 if (other.tag == "Emy")
                 {
-                    MonsterController monsterDamge = other.GetComponent<MonsterController>();
+                    MonsterController monsterDamage = other.GetComponent<MonsterController>();
                     PlayerController player = Player.GetComponent<PlayerController>();
-                    player.DamagePlayer(monsterDamge.Damage / 5);
+                    player.DamagePlayer(monsterDamage.Damage / 5);
+                }
+                else if (other.tag == "EmyWord")
+                {
+                    MonsterWordController monsterDamage = other.GetComponent<MonsterWordController>();
+                    PlayerController player = Player.GetComponent<PlayerController>();
+                    player.DamagePlayer(monsterDamage.Damage / 5);
                 }
             }
         }

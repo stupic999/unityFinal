@@ -8,21 +8,31 @@ public class GunWord : MonoBehaviour {
 
     string[] word = new string[3] { "", "", "" };
 
+    public GameObject GunUI;
+
     public GameObject G;
     public GameObject U;
     public GameObject N;
     public GameObject Box1;
     public GameObject Box2;
     public GameObject Box3;
-    /*
+    Vector3 gPos;
+    Vector3 uPos;
+    Vector3 nPos;
     public GameObject GunDone;
     public GameObject GunWordSide;
-    */
 
     // 字母放对地方就会true
     bool Gin;
     bool Nin;
     bool Uin;
+
+    private void Start()
+    {
+        gPos = G.transform.position;
+        uPos = U.transform.position;
+        nPos = N.transform.position;
+    }
 
     public void clickOnG()
     {
@@ -34,7 +44,7 @@ public class GunWord : MonoBehaviour {
                 if (word[i] == "G")
                 {
                     word[i] = "";
-                    G.transform.position = new Vector2(441.6f, 104.6f);
+                    G.transform.position = gPos;
                     Gin = false;
                     break;
                 }
@@ -60,7 +70,7 @@ public class GunWord : MonoBehaviour {
                 if (word[i] == "N")
                 {
                     word[i] = "";
-                    N.transform.position = new Vector2(768, 104.6f);
+                    N.transform.position = nPos;
                     Nin = false;
                     break;
                 }
@@ -85,7 +95,7 @@ public class GunWord : MonoBehaviour {
                 if (word[i] == "U")
                 {
                     word[i] = "";
-                    U.transform.position = new Vector2(1094.4f, 104.6f);
+                    U.transform.position = uPos;
                     Uin = false;
                     break;
                 }
@@ -122,11 +132,11 @@ public class GunWord : MonoBehaviour {
         if (word[0] == "G" && word[1] == "U" && word[2] == "N" && GameController.GunDone==false)
         {
             GameController.GunDone = true;
+            GunUI.SetActive(true);
             FindObjectOfType<DialogueManager>().StartDialogue(dialogue);            
-            /*
             GunDone.SetActive(true);
-            Destroy(GunWordSide);
-            */
+            GunWordSide.SetActive(false);
+            BagPage.gunPhare = 2;
         }
     }
 }

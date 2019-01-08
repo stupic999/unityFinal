@@ -5,33 +5,70 @@ using UnityEngine;
 public class PickUpWord : MonoBehaviour {
 
     public Dialogue dialogue;
-    CheckPoint saveCheckPoint;
     Tutorial tutorial;
 
-    private void Start()
+    private void Update()
     {
-        saveCheckPoint = GameObject.FindGameObjectWithTag("GM").GetComponent<CheckPoint>();
+        if (transform.tag == "U" && GameController.UDone == true)
+        {
+            Destroy(gameObject);
+        }
+
+        if (transform.tag == "B" && GameController.BDone == true)
+        {
+            Destroy(gameObject);
+        }
+
+        if (transform.tag == "W" && GameController.WDone == true)
+        {
+            Destroy(gameObject);
+        }
+
+        if (transform.tag == "P" && GameController.PDone == true)
+        {
+            Destroy(gameObject);
+        }
+
+        if (transform.tag == "I" && GameController.IDone == true)
+        {
+            Destroy(gameObject);
+        }
+
+        if (transform.tag == "R" && GameController.RDone == true)
+        {
+            Destroy(gameObject);
+        }
+
+        if (transform.tag == "V" && GameController.VDone == true)
+        {
+            Destroy(gameObject);
+        }
+
+        if (transform.tag == "S" && GameController.SDone == true)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.tag == "Player")
         {
-            saveCheckPoint.lastCheckPoint = transform.position;
+            GameController.lastCheckPoint = transform.position;
             FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
             Destroy(gameObject);
             if (transform.tag == "U")
             {
-                GetWords.gotU = true;
                 BagPage.bagOpen = true;
                 Tutorial.BagCantClose = true;
                 tutorial = GetComponentInParent<Tutorial>();
                 tutorial.monster1In();
+                GetWords.gotU = true;
             }
             if (transform.tag == "B")
-            {
-                GetWords.gotB = true;
+            {                
                 Tutorial.Bdone = true;
+                GetWords.gotB = true;
             }
             if (transform.tag == "W")
             {

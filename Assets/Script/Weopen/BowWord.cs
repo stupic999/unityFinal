@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class BowWord : MonoBehaviour {
 
+    public Dialogue dialogue;
+
+    public GameObject BowUI;
+
     string[] word = new string[3] { "", "", "" };
     public GameObject B;
     public GameObject O;
@@ -11,14 +15,24 @@ public class BowWord : MonoBehaviour {
     public GameObject Box1;
     public GameObject Box2;
     public GameObject Box3;
-    /*
+    Vector3 bPos;
+    Vector3 oPos;
+    Vector3 wPos;
+
     public GameObject BowDone;
     public GameObject BowWordSide;
-    */
+
     bool Bin;
     bool Oin;
     bool Win;
- 
+
+    private void Start()
+    {
+        bPos = B.transform.position;
+        oPos = O.transform.position;
+        wPos = W.transform.position;
+    }
+
     public void clickOnB()
     {
         for (int i = 0; i < word.Length; i++)
@@ -27,7 +41,7 @@ public class BowWord : MonoBehaviour {
             if (word[i] == "B")
             {
                 word[i] = "";
-                B.transform.position = new Vector2(441.6f, 104.6f);
+                B.transform.position = bPos;
                 Bin = false;
                 break;
             }
@@ -50,7 +64,7 @@ public class BowWord : MonoBehaviour {
             if (word[i] == "O")
             {
                 word[i] = "";
-                O.transform.position = new Vector2(768, 104.6f);
+                O.transform.position = oPos;
                 Oin = false;
                 break;
             }
@@ -72,7 +86,7 @@ public class BowWord : MonoBehaviour {
             if (word[i] == "W")
             {
                 word[i] = "";
-                W.transform.position = new Vector2(1094.4f, 104.6f);
+                W.transform.position = wPos;
                 Win = false;
                 break;
             }
@@ -107,11 +121,12 @@ public class BowWord : MonoBehaviour {
     {
         if (word[0] == "B" && word[1] == "O" && word[2] == "W")
         {
-            Debug.Log("BowDone");
-            /*
-            GunDone.SetActive(true);
-            Destroy(GunWordSide);
-            */
+            GameController.BowDone = true;
+            BowUI.SetActive(true);
+            BowDone.SetActive(true);
+            BowWordSide.SetActive(false);
+            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+            BagPage.bowPhare = 2;
         }
     }
 }

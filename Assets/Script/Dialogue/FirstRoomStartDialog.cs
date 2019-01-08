@@ -8,6 +8,10 @@ public class FirstRoomStartDialog : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+        if (GameController.firstRoomStarted == false)
+        {
+            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+            GameController.firstRoomStarted = true;
+        }
     }
 }

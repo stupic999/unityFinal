@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PanWord : MonoBehaviour {
 
+    public Dialogue dialogue;
+
+    public GameObject PanUI;
+
     string[] word = new string[3] { "", "", "" };
 
     public GameObject P;
@@ -12,15 +16,24 @@ public class PanWord : MonoBehaviour {
     public GameObject Box1;
     public GameObject Box2;
     public GameObject Box3;
-    /*
+    Vector3 pPos;
+    Vector3 aPos;
+    Vector3 nPos;
+
     public GameObject PanDone;
     public GameObject PanWordSide;
-    */
 
     // 字母放对地方就会true
     bool Pin;
     bool Ain;
     bool Nin;
+
+    private void Start()
+    {
+        pPos = P.transform.position;
+        aPos = A.transform.position;
+        nPos = N.transform.position;
+    }
 
     public void clickOnP()
     {
@@ -30,7 +43,7 @@ public class PanWord : MonoBehaviour {
             if (word[i] == "P")
             {
                 word[i] = "";
-                P.transform.position = new Vector2(441.6f, 104.6f);
+                P.transform.position = pPos;
                 Pin = false;
                 break;
             }
@@ -53,7 +66,7 @@ public class PanWord : MonoBehaviour {
             if (word[i] == "A")
             {
                 word[i] = "";
-                A.transform.position = new Vector2(768, 104.6f);
+                A.transform.position = aPos;
                 Ain = false;
                 break;
             }
@@ -75,7 +88,7 @@ public class PanWord : MonoBehaviour {
             if (word[i] == "N")
             {
                 word[i] = "";
-                N.transform.position = new Vector2(1094.4f, 104.6f);
+                N.transform.position = nPos;
                 Nin = false;
                 break;
             }
@@ -110,11 +123,12 @@ public class PanWord : MonoBehaviour {
     {
         if (word[0] == "P" && word[1] == "A" && word[2] == "N")
         {
-            Debug.Log("PanDone");
-            /*
-            GunDone.SetActive(true);
-            Destroy(GunWordSide);
-            */
+            GameController.PanDone = true;
+            PanUI.SetActive(true);
+            PanDone.SetActive(true);
+            PanWordSide.SetActive(false);
+            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+            BagPage.panPhare = 2;
         }
     }
 }

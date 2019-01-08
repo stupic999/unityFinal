@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class WeopenController : MonoBehaviour
 {
+    public Animator playerAnim;
 
-    int useWhatWeopen=1;
+    public static int useWhatWeopen;
     public GameObject gun;
     public GameObject bow;
     public GameObject pan;
@@ -13,9 +14,29 @@ public class WeopenController : MonoBehaviour
     public GameObject love;
     public GameObject laser;
 
+    public GameObject GunUI;
+    public GameObject BowUI;
+    public GameObject PanUI;
+    public GameObject IronUI;
+    public GameObject LoveUI;
+    public GameObject LaserUI;
+
     // Update is called once per frame
     void Update()
     {
+        if (GameController.GunDone == true)
+            GunUI.SetActive(true);
+        if (GameController.BowDone == true)
+            BowUI.SetActive(true);
+        if (GameController.PanDone == true)
+            PanUI.SetActive(true);
+        if (GameController.IronDone == true)
+            IronUI.SetActive(true);
+        if (GameController.LoveDone == true)
+            LoveUI.SetActive(true);
+        if (GameController.LaserDone == true)
+            LaserUI.SetActive(true);
+
         ChooseWeopen();
 
         if (useWhatWeopen == 1)
@@ -27,8 +48,10 @@ public class WeopenController : MonoBehaviour
             iron.SetActive(false);
             love.SetActive(false);
             laser.SetActive(false);
+            allFalse();
+            playerAnim.SetBool("useGun", true);
         }
-        if (useWhatWeopen == 2)
+        else if (useWhatWeopen == 2)
         {
             bow.SetActive(true);
 
@@ -37,8 +60,10 @@ public class WeopenController : MonoBehaviour
             iron.SetActive(false);
             love.SetActive(false);
             laser.SetActive(false);
+            allFalse();
+            playerAnim.SetBool("useBow", true);
         }
-        if (useWhatWeopen == 3)
+        else if (useWhatWeopen == 3)
         {
             pan.SetActive(true);
 
@@ -47,8 +72,10 @@ public class WeopenController : MonoBehaviour
             iron.SetActive(false);
             love.SetActive(false);
             laser.SetActive(false);
+            allFalse();
+            playerAnim.SetBool("usePan", true);
         }
-        if (useWhatWeopen == 4)
+        else if (useWhatWeopen == 4)
         {
             iron.SetActive(true);
 
@@ -57,8 +84,10 @@ public class WeopenController : MonoBehaviour
             pan.SetActive(false);
             love.SetActive(false);
             laser.SetActive(false);
+            allFalse();
+            playerAnim.SetBool("useIron", true);
         }
-        if (useWhatWeopen == 5)
+        else if (useWhatWeopen == 5)
         {
             love.SetActive(true);
 
@@ -67,8 +96,10 @@ public class WeopenController : MonoBehaviour
             pan.SetActive(false);
             iron.SetActive(false);
             laser.SetActive(false);
+            allFalse();
+            playerAnim.SetBool("useLove", true);
         }
-        if (useWhatWeopen == 6)
+        else if (useWhatWeopen == 6)
         {
             laser.SetActive(true);
 
@@ -77,20 +108,83 @@ public class WeopenController : MonoBehaviour
             pan.SetActive(false);
             iron.SetActive(false);
             love.SetActive(false);
+            allFalse();
+            playerAnim.SetBool("useLaser", true);
         }
+        else
+        {
+            allFalse();
+        }
+    }
+    
+    public void useGun()
+    {
+        if (GameController.GunDone == true)
+        {
+            useWhatWeopen = 1;
+        }
+    }
+
+    public void useBow()
+    {
+        if (GameController.BowDone == true)
+        {
+            useWhatWeopen = 2;
+        }
+    }
+
+    public void usePan()
+    {
+        if (GameController.PanDone == true)
+        {
+            useWhatWeopen = 3;
+        }
+    }
+
+    public void useIron()
+    {
+        if (GameController.IronDone == true)
+        {
+            useWhatWeopen = 4;
+        }
+    }
+
+    public void useLove()
+    {
+        if (GameController.LoveDone == true)
+        {
+            useWhatWeopen = 5;
+        }
+    }
+
+    public void useLaser()
+    {
+        if (GameController.LaserDone == true)
+        {
+            useWhatWeopen = 6;
+        }
+    }
+
+    void allFalse()
+    {
+        playerAnim.SetBool("useGun", false);
+        playerAnim.SetBool("useBow", false);
+        playerAnim.SetBool("usePan", false);
+        playerAnim.SetBool("useIron", false);
+        playerAnim.SetBool("useLove", false);
+        playerAnim.SetBool("useLaser", false);
     }
 
     // 按快捷键1~6对应武器
     void ChooseWeopen()
     {
-        if (GameController.isPause != true && GameController.bagIsOpen != true)
+        if (GameController.isPause != true && GameController.isMenu != true && GameController.bagIsOpen != true)
         {
             if (GameController.GunDone == true)
             {
                 if (Input.GetKeyDown(KeyCode.Alpha1))
                 {
                     useWhatWeopen = 1;
-                    Debug.Log("Gun");
                 }
             }
             if (GameController.BowDone == true)
@@ -98,7 +192,6 @@ public class WeopenController : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Alpha2))
                 {
                     useWhatWeopen = 2;
-                    Debug.Log("Bow");
                 }
             }
             if (GameController.PanDone == true)
@@ -106,7 +199,6 @@ public class WeopenController : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Alpha3))
                 {
                     useWhatWeopen = 3;
-                    Debug.Log("Pan");
                 }
             }
             if (GameController.IronDone == true)
@@ -114,7 +206,6 @@ public class WeopenController : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Alpha4))
                 {
                     useWhatWeopen = 4;
-                    Debug.Log("Iron");
                 }
             }
             if (GameController.LoveDone == true)
@@ -122,7 +213,6 @@ public class WeopenController : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Alpha5))
                 {
                     useWhatWeopen = 5;
-                    Debug.Log("Love");
                 }
             }
             if (GameController.LaserDone == true)
@@ -130,7 +220,6 @@ public class WeopenController : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Alpha6))
                 {
                     useWhatWeopen = 6;
-                    Debug.Log("Laser");
                 }
             }
         }

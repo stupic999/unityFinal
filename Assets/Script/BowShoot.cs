@@ -10,14 +10,14 @@ public class BowShoot : MonoBehaviour
     public Transform bowFirePoint2;
     public Transform bowFirePoint3;
    // int damage = 5;
-    float NextFire = 0.5f;
+    float NextFire = 0.75f;
     float FireCD;
 
     void Update()
     {
-        if (GameController.BowDone == true)
-        {
-            if (GameController.isPause != true && GameController.bagIsOpen != true)
+        if (GameController.BowDone==true)
+            {
+            if (GameController.isPause != true && GameController.isMenu != true && GameController.bagIsOpen != true)
             {
                 if (FireCD < NextFire)
                     FireCD += Time.deltaTime;

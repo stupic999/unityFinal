@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class ChangeRoom : MonoBehaviour {
 
-    public void GoToFirstRoom()
+        CheckPoint saveCheckPoint;
+
+    public static void GoToFirstRoom()
     {
         SceneManager.LoadScene("FirstRoom");
     }

@@ -5,13 +5,22 @@ using UnityEngine;
 public class PickUpBag : MonoBehaviour {
 
     public Dialogue dialogue;
+    public GameObject bagBtn;
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.B))
+        if (GameController.BagDone == true)
         {
-            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
             Destroy(gameObject);
+        }
+
+        if (GameController.isPause != true && GameController.isMenu != true && GameController.bagIsOpen != true)
+        {
+            if (Input.GetKey(KeyCode.B))
+            {
+                FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+                    GameController.BagDone = true;
+            }
         }
     }
 
@@ -20,7 +29,8 @@ public class PickUpBag : MonoBehaviour {
         if (collision.tag == "Player")
         {
             FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
-            Destroy(gameObject);
+            bagBtn.SetActive(true);
+            GameController.BagDone = true;
         }
     }
 }

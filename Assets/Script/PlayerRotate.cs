@@ -7,7 +7,7 @@ public class PlayerRotate : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
         // 玩家旋转3D
-        if (GameController.isPause != true && GameController.bagIsOpen != true)
+        if (GameController.isPause != true && GameController.isMenu != true && GameController.bagIsOpen != true)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;

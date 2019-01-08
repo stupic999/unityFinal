@@ -1,19 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LoveHeal : MonoBehaviour {
+
+    public Animator playerAnim;
 
     int heal = 50;
     float NextFire = 60f;
     public GameObject Player;
+    public Image LovePic;
     float FireCD=60;
 
     void Update()
     {
-        if (GameController.LoveDone == true)
+        LovePic.fillAmount = FireCD / 60;
+
+        if (FireCD == 0)
         {
-            if (GameController.isPause != true && GameController.bagIsOpen != true)
+            playerAnim.SetBool("Heal", false);
+        }
+
+        if(GameController.LoveDone == true)
+            {
+            if (GameController.isPause != true && GameController.isMenu != true && GameController.bagIsOpen != true)
             {
                 if (FireCD < NextFire)
                     FireCD += Time.deltaTime;
@@ -23,6 +34,7 @@ public class LoveHeal : MonoBehaviour {
                     FireCD = 0;
                     PlayerController player = Player.GetComponent<PlayerController>();
                     player.HealPlayer(heal);
+                    playerAnim.SetBool("Heal", true);
                 }
             }
         }

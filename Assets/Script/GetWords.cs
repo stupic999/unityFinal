@@ -4,17 +4,6 @@ using UnityEngine;
 
 public class GetWords : MonoBehaviour {
 
-    // 还未亮起的字母，也就是未获得的字母
-    public GameObject EmptyGunU;
-    public GameObject EmptyBowB;
-    public GameObject EmptyBowW;
-    public GameObject EmptyPanP;
-    public GameObject EmptyIronI;
-    public GameObject EmptyIronR;
-    public GameObject EmptyLaserR2;
-    public GameObject EmptyLoveV;
-    public GameObject EmptyLaserS;
-
     // 字母
     public GameObject G;
     public GameObject N;
@@ -85,68 +74,101 @@ public class GetWords : MonoBehaviour {
 
         // 如果拿到了字母，会怎么样？
         if (gotU == true)
-        {
-            GetWordPro(U, EmptyGunU);
+        { 
             gunWords++;
             gotU = false;
+            GameController.UDone = true;
         }
 
         if (gotB == true)
-        {
-            GetWordPro(B, EmptyBowB);
+        { 
             bowWords++;
             gotB = false;
+            GameController.BDone = true;
         }
 
         if (gotW == true)
         {
-            GetWordPro(W, EmptyBowW);
             bowWords++;
             gotW = false;
+            GameController.WDone = true;
         }
 
         if (gotP == true)
         {
-            GetWordPro(P, EmptyPanP);
             panWords++;
             gotP = false;
+            GameController.PDone = true;
         }
 
         if (gotI == true)
         {
-            GetWordPro(I, EmptyIronI);
             ironWords++;
             gotI = false;
+            GameController.IDone = true;
         }
 
         if (gotR == true)
         {
-            GetWordPro(R, EmptyIronR);
-            GetWordPro(R2,EmptyLaserR2);
             ironWords++;
             laserWords++;
             gotR = false;
+            GameController.RDone = true;
         }
 
         if (gotV == true)
         {
-            GetWordPro(V, EmptyLoveV);
             loveWords++;
             gotV = false;
+            GameController.VDone = true;
         }
 
         if (gotS == true)
         {
-            GetWordPro(S, EmptyLaserS);
             laserWords++;
             gotS = false;
+            GameController.SDone = true;
         }
 
-    }
+        if (GameController.UDone == true)
+        {
+            U.SetActive(true);
+        }
 
-    void GetWordPro(GameObject show, GameObject des)
-    {
-        show.SetActive(true);
-        Destroy(des);
+        if (GameController.BDone == true)
+        {
+            B.SetActive(true);
+        }
+
+        if (GameController.WDone == true)
+        {
+            W.SetActive(true);
+        }
+
+        if (GameController.PDone == true)
+        {
+            P.SetActive(true);
+        }
+
+        if (GameController.IDone == true)
+        {
+            I.SetActive(true);
+        }
+
+        if (GameController.RDone == true)
+        {
+            R.SetActive(true);
+            R2.SetActive(true);
+        }
+
+        if (GameController.VDone == true)
+        {
+            V.SetActive(true);
+        }
+
+        if (GameController.SDone == true)
+        {
+            S.SetActive(true);
+        }
     }
 }

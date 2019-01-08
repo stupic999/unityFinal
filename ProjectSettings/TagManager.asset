@@ -9,6 +9,14 @@ TagManager:
   - B
   - U
   - GM
+  - I
+  - W
+  - P
+  - R
+  - V
+  - S
+  - Bullet
+  - Search
   layers:
   - Default
   - TransparentFX
@@ -19,7 +27,7 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
+  - Wall
   - 
   - 
   - 

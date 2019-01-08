@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class LaserWord : MonoBehaviour {
 
+    public Dialogue dialogue;
+
+    public GameObject LaserUI;
+
     // 可能考虑用empty当字母回去的坐标，或者用screan hight之类的
     string[] word = new string[5] { "", "", "", "", "" };
 
@@ -17,10 +21,14 @@ public class LaserWord : MonoBehaviour {
     public GameObject Box3;
     public GameObject Box4;
     public GameObject Box5;
-    /*
-    public GameObject LoveDone;
-    public GameObject LoveWordSide;
-    */
+    Vector3 lPos;
+    Vector3 aPos;
+    Vector3 sPos;
+    Vector3 ePos;
+    Vector3 rPos;
+
+    public GameObject LaserDone;
+    public GameObject LaserWordSide;
 
     // 字母放对地方就会true
     bool Lin;
@@ -28,7 +36,15 @@ public class LaserWord : MonoBehaviour {
     bool Sin;
     bool Ein;
     bool Rin;
-    
+
+    private void Start()
+    {
+        lPos = L.transform.position;
+        aPos = A.transform.position;
+        sPos = S.transform.position;
+        ePos = E.transform.position;
+        rPos = S.transform.position;
+    }
 
     public void clickOnL()
     {
@@ -38,7 +54,7 @@ public class LaserWord : MonoBehaviour {
             if (word[i] == "L")
             {
                 word[i] = "";
-                L.transform.position = new Vector2(380.5f, 111.2f);
+                L.transform.position = lPos;
                 Lin = false;
                 break;
             }
@@ -48,7 +64,7 @@ public class LaserWord : MonoBehaviour {
                 word[i] = "L";
                 Lin = true;
                 BoxIn(i, L);
-                LaserDone();
+                laserDone();
                 break;
             }
         }
@@ -61,7 +77,7 @@ public class LaserWord : MonoBehaviour {
             if (word[i] == "A")
             {
                 word[i] = "";
-                A.transform.position = new Vector2(570.8f, 104.6f);
+                A.transform.position = aPos;
                 Ain = false;
                 break;
             }
@@ -70,7 +86,7 @@ public class LaserWord : MonoBehaviour {
                 word[i] = "A";
                 BoxIn(i, A);
                 Ain = true;
-                LaserDone();
+                laserDone();
                 break;
             }
         }
@@ -85,7 +101,7 @@ public class LaserWord : MonoBehaviour {
             if (word[i] == "S")
             {
                 word[i] = "";
-                S.transform.position = new Vector2(761, 111.2f);
+                S.transform.position = sPos;
                 Sin = false;
                 break;
             }
@@ -94,7 +110,7 @@ public class LaserWord : MonoBehaviour {
                 word[i] = "S";
                 BoxIn(i, S);
                 Sin = true;
-                LaserDone();
+                laserDone();
                 break;
             }
         }
@@ -107,7 +123,7 @@ public class LaserWord : MonoBehaviour {
             if (word[i] == "E")
             {
                 word[i] = "";
-                E.transform.position = new Vector2(951.3f, 111.2f);
+                E.transform.position = ePos;
                 Ein = false;
                 break;
             }
@@ -116,7 +132,7 @@ public class LaserWord : MonoBehaviour {
                 word[i] = "E";
                 BoxIn(i, E);
                 Ein = true;
-                LaserDone();
+                laserDone();
                 break;
             }
         }
@@ -129,7 +145,7 @@ public class LaserWord : MonoBehaviour {
             if (word[i] == "R")
             {
                 word[i] = "";
-                R.transform.position = new Vector2(1141.5f, 111.2f);
+                R.transform.position = rPos;
                 Rin = false;
                 break;
             }
@@ -138,7 +154,7 @@ public class LaserWord : MonoBehaviour {
                 word[i] = "R";
                 BoxIn(i, R);
                 Rin = true;
-                LaserDone();
+                laserDone();
                 break;
             }
         }
@@ -168,15 +184,16 @@ public class LaserWord : MonoBehaviour {
         }
     }
 
-    void LaserDone()
+    void laserDone()
     {
         if (word[0] == "L" && word[1] == "A" && word[2] == "S" && word[3] == "E" && word[4]=="R")
         {
-            Debug.Log("LaserDone");
-            /*
-            IronDone.SetActive(true);
-            Destroy(IronWordSide);
-            */
+            GameController.LaserDone = true;
+            LaserUI.SetActive(true);
+            LaserDone.SetActive(true);
+            LaserWordSide.SetActive(false);
+            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+            BagPage.laserPhare = 2;
         }
     }
 }

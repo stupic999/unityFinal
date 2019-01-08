@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class IronWord : MonoBehaviour {
 
+    public Dialogue dialogue;
+
+    public GameObject IronUI;
+
     string[] word = new string[4] { "", "", "", "" };
 
     public GameObject I;
@@ -14,16 +18,26 @@ public class IronWord : MonoBehaviour {
     public GameObject Box2;
     public GameObject Box3;
     public GameObject Box4;
-    /*
-    public GameObject LoveDone;
-    public GameObject LoveWordSide;
-    */
+    Vector3 iPos;
+    Vector3 rPos;
+    Vector3 oPos;
+    Vector3 nPos;
+    public GameObject IronDone;
+    public GameObject IronWordSide;
 
     // 字母放对地方就会true
     bool Iin;
     bool Oin;
     bool Rin;
     bool Nin;
+
+    private void Start()
+    {
+        iPos = I.transform.position;
+        rPos = R.transform.position;
+        oPos = O.transform.position;
+        nPos = N.transform.position;
+    }
 
     public void clickOnI()
     {
@@ -33,7 +47,7 @@ public class IronWord : MonoBehaviour {
             if (word[i] == "I")
             {
                 word[i] = "";
-                I.transform.position = new Vector2(418.6f, 111.2f);
+                I.transform.position = iPos;
                 Iin = false;
                 break;
             }
@@ -43,7 +57,7 @@ public class IronWord : MonoBehaviour {
                 word[i] = "I";
                 Iin = true;
                 BoxIn(i, I);
-                LoveDone();
+                ironDone();
                 break;
             }
         }
@@ -56,7 +70,7 @@ public class IronWord : MonoBehaviour {
             if (word[i] == "O")
             {
                 word[i] = "";
-                O.transform.position = new Vector2(646.9f, 111.2f);
+                O.transform.position = oPos;
                 Oin = false;
                 break;
             }
@@ -65,7 +79,7 @@ public class IronWord : MonoBehaviour {
                 word[i] = "O";
                 BoxIn(i, O);
                 Oin = true;
-                LoveDone();
+                ironDone();
                 break;
             }
         }
@@ -78,7 +92,7 @@ public class IronWord : MonoBehaviour {
             if (word[i] == "R")
             {
                 word[i] = "";
-                R.transform.position = new Vector2(875.2f, 111.2f);
+                R.transform.position = rPos;
                 Rin = false;
                 break;
             }
@@ -87,7 +101,7 @@ public class IronWord : MonoBehaviour {
                 word[i] = "R";
                 BoxIn(i, R);
                 Rin = true;
-                LoveDone();
+                ironDone();
                 break;
             }
         }
@@ -100,7 +114,7 @@ public class IronWord : MonoBehaviour {
             if (word[i] == "N")
             {
                 word[i] = "";
-                N.transform.position = new Vector2(1103.5f, 111.2f);
+                N.transform.position = nPos;
                 Nin = false;
                 break;
             }
@@ -109,7 +123,7 @@ public class IronWord : MonoBehaviour {
                 word[i] = "N";
                 BoxIn(i, N);
                 Nin = true;
-                LoveDone();
+                ironDone();
                 break;
             }
         }
@@ -135,15 +149,16 @@ public class IronWord : MonoBehaviour {
         }
     }
 
-    void LoveDone()
+    void ironDone()
     {
         if (word[0] == "I" && word[1] == "R" && word[2] == "O" && word[3] == "N")
         {
-            Debug.Log("IronDone");
-            /*
+            GameController.IronDone = true;
+            IronUI.SetActive(true);
             IronDone.SetActive(true);
-            Destroy(IronWordSide);
-            */
+            IronWordSide.SetActive(false);
+            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+            BagPage.ironPhare = 2;
         }
     }
 }

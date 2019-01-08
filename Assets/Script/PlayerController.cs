@@ -7,21 +7,18 @@ public class PlayerController : MonoBehaviour {
 
     public Dialogue dialogue;
 
+    public Animator playerAnim;
+
     // 移动
     Vector3 movement;
     public float moveSpd;
     Rigidbody playerRb;
 
-    // 死了几次
-    int dieTime;
-
     // 玩家被伤害后的无敌
     float invincibleTime;
     bool isInvincible;
     float timeSpentInvincible;
-    Renderer playerRender;
-    CheckPoint loadCheckPoint;
-    
+    Renderer playerRender;    
 
     [System.Serializable]
     public class playerStats
@@ -43,20 +40,25 @@ public class PlayerController : MonoBehaviour {
     public playerStats playerStat = new playerStats();
 
     [SerializeField]
-    private Hp playerHp;
+    private PlayerHp playerHp;
 
     void Start()
     {
         playerStat.FullHp();
         playerHp.SetHealth(playerStat.currentHp, playerStat.maxHp);
         playerRb = GetComponent<Rigidbody>();
-        playerRender = GetComponent<Renderer>();
-        loadCheckPoint = GameObject.FindGameObjectWithTag("GM").GetComponent<CheckPoint>();
+        playerRender = GetComponentInChildren<SpriteRenderer>();
     }
 
     void FixedUpdate()
     {
-        if (GameController.isPause != true && GameController.bagIsOpen != true)
+        if (GameController.isLoadHp == true)
+        {
+            playerStat.currentHp = GameController.playerHp;
+            playerHp.SetHealth(playerStat.currentHp, playerStat.maxHp);
+        }
+
+        if (GameController.isPause != true && GameController.isMenu != true && GameController.bagIsOpen != true)
         {
             // 被伤害后的无敌效果
             if (invincibleTime > 0f)
@@ -95,6 +97,13 @@ public class PlayerController : MonoBehaviour {
         movement = movement.normalized * moveSpd * Time.deltaTime;
 
         playerRb.MovePosition(transform.position + movement);
+
+        if (h != 0 || v != 0)
+        {
+            playerAnim.SetBool("isMove", true);
+        }
+        else
+            playerAnim.SetBool("isMove", false);
     }
 
     public void DamagePlayer(int damage)
@@ -105,16 +114,17 @@ public class PlayerController : MonoBehaviour {
             if (playerStat.currentHp <= 0)
             {
                 playerStat.FullHp();
-                transform.position = loadCheckPoint.lastCheckPoint;
-                dieTime++;
+                transform.position = GameController.lastCheckPoint;
+                GameController.dieTime++;
                 FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
 
-                if (dieTime >= 3)
+                if (GameController.dieTime >= 3)
                 {
                     GameController.gameOver = true;
                 }
             }
             playerHp.SetHealth(playerStat.currentHp, playerStat.maxHp);
+            GameController.playerHp = playerStat.currentHp;
             invincibleTime = 1f;
         }
     }

@@ -9,6 +9,10 @@ public class MainRoomController : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+        if (GameController.mainRoomStarted == false)
+        {
+            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+            GameController.mainRoomStarted = true;
+        }
     }
 }

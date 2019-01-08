@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class BagPage : MonoBehaviour {
 
+    public Dialogue warning;
+
     public Dialogue dialogue;
 
-    public static bool bagOpen = false;
+    public static bool bagOpen;
     public GameObject Bag;
-    public GameObject WeopenSystem;
+
+    public GameObject BagUI;
 
     // 武器拼字的阶段，0为字未筹齐，1为筹齐已可以拼字，2已拼好
     public static int gunPhare;
@@ -34,6 +37,13 @@ public class BagPage : MonoBehaviour {
     public GameObject LoveWordSide;
     public GameObject LaserWordSide;
 
+    public GameObject GunDone;
+    public GameObject BowDone;
+    public GameObject PanDone;
+    public GameObject IronDone;
+    public GameObject LoveDone;
+    public GameObject LaserDone;
+
     void Update()
     {
         if (bagOpen == true)
@@ -41,7 +51,10 @@ public class BagPage : MonoBehaviour {
         else
             GameController.bagIsOpen = false;
 
-        if (GameController.isPause != true || GameController.bagIsOpen == true)
+        if (GameController.BagDone == true)
+            BagUI.SetActive(true);
+
+        if (GameController.isPause != true && GameController.isMenu!=true || GameController.bagIsOpen == true)
         {
             if (Input.GetKeyDown(KeyCode.B))
             {
@@ -63,30 +76,35 @@ public class BagPage : MonoBehaviour {
             {
                 GetWords.BowWords++;
                 bowPhare = 1;
+                FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
             }
 
             if (GetWords.PanWords == 3)
             {
                 GetWords.PanWords++;
                 panPhare = 1;
+                FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
             }
 
             if (GetWords.IronWords == 4)
             {
                 GetWords.IronWords++;
                 ironPhare = 1;
+                FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
             }
 
             if (GetWords.LoveWords == 4)
             {
                 GetWords.LoveWords++;
                 lovePhare = 1;
+                FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
             }
 
             if (GetWords.LaserWords == 5)
             {
                 GetWords.LaserWords++;
                 laserPhare = 1;
+                FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
             }
         }
     }
@@ -96,14 +114,15 @@ public class BagPage : MonoBehaviour {
         if (gunPhare == 0)
         {
             changePage(GunIn);
-            WeopenSystem.SetActive(true);
         }
         else if (gunPhare == 1)
+        {
             changePage(GunWordSide);
-        /* 要加上完成画面
-         else
-         changTye(GunDone,Bag);
-         */
+        }
+        else
+        {
+            changePage(GunDone);
+        }
     }
 
     public void bowPage()
@@ -111,10 +130,15 @@ public class BagPage : MonoBehaviour {
         if (bowPhare == 0)
         {
             changePage(BowIn);
-            WeopenSystem.SetActive(true);
         }
         else if (bowPhare == 1)
+        {
             changePage(BowWordSide);
+        }
+        else
+        {
+            changePage(BowDone);
+        }
     }
 
     public void panPage()
@@ -122,10 +146,15 @@ public class BagPage : MonoBehaviour {
         if (panPhare == 0)
         {
             changePage(PanIn);
-            WeopenSystem.SetActive(true);
         }
         else if (panPhare == 1)
+        {
             changePage(PanWordSide);
+        }
+        else
+        {
+            changePage(PanDone);
+        }
     }
 
     public void ironPage()
@@ -133,10 +162,15 @@ public class BagPage : MonoBehaviour {
         if (ironPhare == 0)
         {
             changePage(IronIn);
-            WeopenSystem.SetActive(true);
         }
         else if (ironPhare == 1)
+        {
             changePage(IronWordSide);
+        }
+        else
+        {
+            changePage(IronDone);
+        }
     }
 
     public void lovePage()
@@ -144,42 +178,64 @@ public class BagPage : MonoBehaviour {
         if (lovePhare == 0)
         {
             changePage(LoveIn);
-            WeopenSystem.SetActive(true);
         }
         else if (lovePhare == 1)
+        {
             changePage(LoveWordSide);
+        }
+        else
+        {
+            changePage(LoveDone);
+        }
     }
     public void laserPage()
     {
         if (laserPhare == 0)
         {
             changePage(LaserIn);
-            WeopenSystem.SetActive(true);
         }
         else if (laserPhare == 1)
+        {
             changePage(LaserWordSide);
+        }
+        else
+        {
+            changePage(LaserDone);
+        }
     }
 
     public void bagPage()
     {
-        bagOpen = true;
+        if (Tutorial.BagCantClose == true && GameController.GunDone == false)
+        {
+            FindObjectOfType<DialogueManager>().StartDialogue(warning);
+        }
+        else
+        {
+            bagOpen = true;
 
-        Bag.SetActive(true);
+            Bag.SetActive(true);
 
-        // 全部unvisible,只有背包打开
-        WeopenSystem.SetActive(false);
-        GunIn.SetActive(false);
-        BowIn.SetActive(false);
-        PanIn.SetActive(false);
-        IronIn.SetActive(false);
-        LoveIn.SetActive(false);
-        LaserIn.SetActive(false);
-        GunWordSide.SetActive(false);
-        BowWordSide.SetActive(false);
-        PanWordSide.SetActive(false);
-        IronWordSide.SetActive(false);
-        LoveWordSide.SetActive(false);
-        LaserWordSide.SetActive(false);
+            // 全部unvisible,只有背包打开
+            GunIn.SetActive(false);
+            BowIn.SetActive(false);
+            PanIn.SetActive(false);
+            IronIn.SetActive(false);
+            LoveIn.SetActive(false);
+            LaserIn.SetActive(false);
+            GunWordSide.SetActive(false);
+            BowWordSide.SetActive(false);
+            PanWordSide.SetActive(false);
+            IronWordSide.SetActive(false);
+            LoveWordSide.SetActive(false);
+            LaserWordSide.SetActive(false);
+            GunDone.SetActive(false);
+            BowDone.SetActive(false);
+            PanDone.SetActive(false);
+            IronDone.SetActive(false);
+            LoveDone.SetActive(false);
+            LaserDone.SetActive(false);
+        }
     }
 
     public void allClose()
@@ -187,14 +243,13 @@ public class BagPage : MonoBehaviour {
         // 如果拿到U了，不组装出枪，就不能关掉背包哦~
         if (Tutorial.BagCantClose == true && GameController.GunDone == false)
         {
-            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+            FindObjectOfType<DialogueManager>().StartDialogue(warning);
         }
         else
         {
             // 全部不见
             bagOpen = false;
 
-            WeopenSystem.SetActive(false);
             GunIn.SetActive(false);
             BowIn.SetActive(false);
             PanIn.SetActive(false);
@@ -208,6 +263,13 @@ public class BagPage : MonoBehaviour {
             LoveWordSide.SetActive(false);
             LaserWordSide.SetActive(false);
             Bag.SetActive(false);
+            GunDone.SetActive(false);
+            BowDone.SetActive(false);
+            PanDone.SetActive(false);
+            IronDone.SetActive(false);
+            LoveDone.SetActive(false);
+            LaserDone.SetActive(false);
+
             GameController.bagIsOpen = false;
         }
     }
@@ -215,28 +277,29 @@ public class BagPage : MonoBehaviour {
 
     void changePage(GameObject show)
     {
-        Bag.SetActive(false);
-        GunIn.SetActive(false);
-        BowIn.SetActive(false);
-        PanIn.SetActive(false);
-        IronIn.SetActive(false);
-        LoveIn.SetActive(false);
-        LaserIn.SetActive(false);
-
+        allClose();
+        bagOpen = true;
         show.SetActive(true);
     }
 
-    void openBag()
+    public void openBag()
     {
         // 打开背包
-        bagOpen = !bagOpen;
-        if (bagOpen == true)
+        if (Tutorial.BagCantClose == true && GameController.GunDone == false)
         {
-            Bag.SetActive(true);
+            FindObjectOfType<DialogueManager>().StartDialogue(warning);
         }
         else
         {
-            allClose();
+            bagOpen = !bagOpen;
+            if (bagOpen == true)
+            {
+                Bag.SetActive(true);
+            }
+            else
+            {
+                allClose();
+            }
         }
     }
 }
