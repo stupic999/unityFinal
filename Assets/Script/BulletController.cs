@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletController : MonoBehaviour {
 
     public float bulletSpd = 1f;
-    float destroyTime=200;
+    float destroyTime=2;
     float surviveTime;
     public int damage = 10;
 

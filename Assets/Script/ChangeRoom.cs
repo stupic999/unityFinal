@@ -22,6 +22,11 @@ public class ChangeRoom : MonoBehaviour {
         SceneManager.LoadScene("GameOver");
     }
 
+    public static void GoToBossRoom()
+    {
+        SceneManager.LoadScene("BossRoom");
+    }
+
     public void Quit()
     {
         Application.Quit();

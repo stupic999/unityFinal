@@ -8,6 +8,7 @@ public class MonsterWordController : MonoBehaviour {
     public GameObject Word;
     public bool Alive = true;
     public int monsterNum;
+    MonsterSearch monsterSearch;
 
     [System.Serializable]
     public class monsterStats
@@ -35,6 +36,7 @@ public class MonsterWordController : MonoBehaviour {
     {
         emyStat.FullHp();
         monsterHp.SetHealth(emyStat.currentHp, emyStat.maxHp);
+        monsterSearch = GetComponentInParent<MonsterSearch>();
     }
 
     private void Update()
@@ -63,10 +65,11 @@ public class MonsterWordController : MonoBehaviour {
             {
                 GameController.FirstRoomPortalDone = true;
                 tutorial.PortalShow();
-            }
-            gameObject.SetActive(false);
+            }            
             Alive = false;
             Instantiate(Word, transform.position, transform.rotation);
+            monsterSearch.monsterDie = true;
+            gameObject.SetActive(false);
         }
         if (monsterNum == 0)
         {

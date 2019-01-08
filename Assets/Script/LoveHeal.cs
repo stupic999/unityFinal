@@ -28,13 +28,15 @@ public class LoveHeal : MonoBehaviour {
             {
                 if (FireCD < NextFire)
                     FireCD += Time.deltaTime;
-
-                if (Input.GetMouseButton(0) && FireCD >= NextFire)
+                if (WeopenController.useWhatWeopen == 5)
                 {
-                    FireCD = 0;
-                    PlayerController player = Player.GetComponent<PlayerController>();
-                    player.HealPlayer(heal);
-                    playerAnim.SetBool("Heal", true);
+                    if (Input.GetMouseButton(0) && FireCD >= NextFire)
+                    {
+                        FireCD = 0;
+                        PlayerController player = Player.GetComponent<PlayerController>();
+                        player.HealPlayer(heal);
+                        playerAnim.SetBool("Heal", true);
+                    }
                 }
             }
         }

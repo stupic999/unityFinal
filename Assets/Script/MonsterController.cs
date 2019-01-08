@@ -6,6 +6,7 @@ public class MonsterController : MonoBehaviour
 {
     public bool Alive = true;
     public int monsterNum;
+    MonsterSearch monsterSearch;
 
     public int Damage = 10;
 
@@ -35,6 +36,7 @@ public class MonsterController : MonoBehaviour
     {
         emyStat.FullHp();
         monsterHp.SetHealth(emyStat.currentHp, emyStat.maxHp);
+        monsterSearch = GetComponentInParent<MonsterSearch>();
     }
 
     private void Update()
@@ -120,6 +122,8 @@ public class MonsterController : MonoBehaviour
         {
             gameObject.SetActive(false);
             Alive = false;
+            monsterSearch.monsterDie = true;
+            GameController.monstersDie++;            
         }
         monsterHp.SetHealth(emyStat.currentHp, emyStat.maxHp);
         GameController.Monster12Hp = emyStat.currentHp;
@@ -169,7 +173,6 @@ public class MonsterController : MonoBehaviour
         }
         else if (monsterNum == 12)
         {
-            Debug.Log(GameController.Monster12Hp + "damaged");
             GameController.Monster12Hp = emyStat.currentHp;
         }
         else if (monsterNum == 13)

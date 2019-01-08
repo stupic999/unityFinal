@@ -6,7 +6,7 @@ public class LaserShoot : MonoBehaviour {
 
     public GameObject bullet;
     public Transform laser;
- //   int damage = 5;
+    int damage = 5;
     float NextFire = 0.1f;
     float FireCD;
 

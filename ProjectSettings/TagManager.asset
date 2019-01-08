@@ -17,6 +17,7 @@ TagManager:
   - S
   - Bullet
   - Search
+  - MainRoomPortal
   layers:
   - Default
   - TransparentFX

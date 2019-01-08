@@ -9,6 +9,10 @@ public class GameController : MonoBehaviour {
     public GameObject WordB;
     public GameObject WordR;
 
+    public static int monstersDie;
+
+    public GameObject mainRoomController;
+
     public MonsterChase mT;
     public MonsterChase m0;
     public MonsterChase m1;
@@ -177,7 +181,16 @@ public class GameController : MonoBehaviour {
     public static int playerHp=100;
     public static bool isLoadHp;
 
-    void Update () {     
+    void Update () {
+
+        if (scene == 1)
+        {
+            mainRoomController.SetActive(true);
+        }
+        else
+        {
+            mainRoomController.SetActive(false);
+        }
 
         if (dieTime == 0)
         {
@@ -230,6 +243,22 @@ public class GameController : MonoBehaviour {
             MonsterTSearch.SetActive(false);
             MonsterRoot.SetActive(true);
             scene = 1;
+        }
+
+        if (Input.GetKey(KeyCode.F6))
+        {
+            ChangeRoom.GoToBossRoom();
+            DontDestroyOnLoad(Controller);
+            DontDestroyOnLoad(Player);
+            DontDestroyOnLoad(MainCamare);
+            MainCamare.orthographicSize = 5;
+            DontDestroyOnLoad(UI);
+            DontDestroyOnLoad(MonsterRoot);
+            Player.transform.position = new Vector3(-13, 0, -13);
+            lastCheckPoint = new Vector3(-13, 0, -13);
+            DontDestroyOnLoad(MonsterTSearch);
+            scene = 2;
+            MonsterRoot.SetActive(false);
         }
 
         if (gameOver == true)

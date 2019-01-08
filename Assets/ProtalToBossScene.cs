@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProtalToMainScene : MonoBehaviour {
+public class ProtalToBossScene : MonoBehaviour
+{
 
     public Dialogue dialogue;
     public GameObject Controller;
@@ -14,28 +15,21 @@ public class ProtalToMainScene : MonoBehaviour {
 
     private void OnTriggerStay(Collider other)
     {
-        if (Tutorial.Bdone == true && other.tag == "Player")
+        if (other.tag == "Player")
         {
-            ChangeRoom.GoToMainRoom();
+            ChangeRoom.GoToBossRoom();
             DontDestroyOnLoad(Controller);
             DontDestroyOnLoad(Player);
             DontDestroyOnLoad(MainCamare);
-            MainCamare.orthographicSize = 5;
+            MainCamare.orthographicSize = 12;
             DontDestroyOnLoad(UI);
             DontDestroyOnLoad(MonsterRoot);
-            Player.transform.position = new Vector3(-48, 0, -23);
-            GameController.lastCheckPoint = new Vector3(-48, 0, -23);
+            Player.transform.position = new Vector3(-13, 0, -13);
+            GameController.lastCheckPoint = new Vector3(-13, 0, -13);
             DontDestroyOnLoad(MonsterTSearch);
-            GameController.scene = 1;
-            MonsterRoot.SetActive(true);
-        }
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        if (Tutorial.Bdone == false && other.tag == "Player")
-        {
-            FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+            GameController.scene = 2;
+            MonsterRoot.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 }

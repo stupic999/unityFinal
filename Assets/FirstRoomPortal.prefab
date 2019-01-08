@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 65465020591567746}
   - component: {fileID: 114096551414079040}
   m_Layer: 0
-  m_Name: Portal
+  m_Name: FirstRoomPortal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -195,7 +195,9 @@ MonoBehaviour:
   Controller: {fileID: 0}
   Player: {fileID: 0}
   MainCamare: {fileID: 0}
+  MonsterRoot: {fileID: 0}
   UI: {fileID: 0}
+  MonsterTSearch: {fileID: 0}
 --- !u!198 &198081376479777840
 ParticleSystem:
   m_ObjectHideFlags: 1
