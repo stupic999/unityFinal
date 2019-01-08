@@ -447,7 +447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -26244,7 +26244,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4840142778959534, guid: 1e12cca2d60a67a4bb9b4cbfadaddaa3, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114661826298992540, guid: 1e12cca2d60a67a4bb9b4cbfadaddaa3,
         type: 2}
@@ -28491,7 +28491,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4861751047160186, guid: 60463ebefec5a7b42ae46fe69ac5bc64, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114888976125574480, guid: 60463ebefec5a7b42ae46fe69ac5bc64,
         type: 2}

@@ -247,6 +247,7 @@ public class BagPage : MonoBehaviour {
         }
         else
         {
+            audioController.Btn = true;
             // 全部不见
             bagOpen = false;
 
@@ -277,6 +278,7 @@ public class BagPage : MonoBehaviour {
 
     void changePage(GameObject show)
     {
+        audioController.Btn = true;
         allClose();
         bagOpen = true;
         show.SetActive(true);
@@ -294,6 +296,7 @@ public class BagPage : MonoBehaviour {
             bagOpen = !bagOpen;
             if (bagOpen == true)
             {
+                audioController.Btn = true;
                 Bag.SetActive(true);
             }
             else

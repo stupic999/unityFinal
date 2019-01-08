@@ -121,6 +121,7 @@ public class WeopenController : MonoBehaviour
     {
         if (GameController.GunDone == true)
         {
+            audioController.Btn = true;
             useWhatWeopen = 1;
         }
     }
@@ -129,6 +130,7 @@ public class WeopenController : MonoBehaviour
     {
         if (GameController.BowDone == true)
         {
+            audioController.Btn = true;
             useWhatWeopen = 2;
         }
     }
@@ -137,6 +139,7 @@ public class WeopenController : MonoBehaviour
     {
         if (GameController.PanDone == true)
         {
+            audioController.Btn = true;
             useWhatWeopen = 3;
         }
     }
@@ -145,6 +148,7 @@ public class WeopenController : MonoBehaviour
     {
         if (GameController.IronDone == true)
         {
+            audioController.Btn = true;
             useWhatWeopen = 4;
         }
     }
@@ -153,6 +157,7 @@ public class WeopenController : MonoBehaviour
     {
         if (GameController.LoveDone == true)
         {
+            audioController.Btn = true;
             useWhatWeopen = 5;
         }
     }
@@ -161,6 +166,7 @@ public class WeopenController : MonoBehaviour
     {
         if (GameController.LaserDone == true)
         {
+            audioController.Btn = true;
             useWhatWeopen = 6;
         }
     }

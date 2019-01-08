@@ -39,6 +39,7 @@ public class DialogueManager : MonoBehaviour{
 
     public void DisplayNextSentence()
     {
+        audioController.Btn = true;
         if (sentences.Count <= 0)
         {
             EndDialogue();

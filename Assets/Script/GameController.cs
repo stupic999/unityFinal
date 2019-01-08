@@ -308,6 +308,7 @@ public class GameController : MonoBehaviour {
 
     public void SaveGame()
     {
+        audioController.Btn = true;
         if (scene == 2)
         {
             FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
@@ -510,6 +511,7 @@ public class GameController : MonoBehaviour {
 
     public void LoadGame()
     {
+        audioController.Btn = true;
         if (File.Exists(Application.persistentDataPath + "/gamesave.save"))
         {
             BinaryFormatter bf = new BinaryFormatter();
