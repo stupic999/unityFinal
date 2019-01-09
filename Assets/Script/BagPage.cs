@@ -212,6 +212,7 @@ public class BagPage : MonoBehaviour {
         }
         else
         {
+            audioController.Btn = true;
             bagOpen = true;
 
             Bag.SetActive(true);

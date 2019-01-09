@@ -6,6 +6,7 @@ public class StartTheGame : MonoBehaviour {
 
     public void StartGame()
     {
+        audioController.Btn = true;
         ChangeRoom.GoToFirstRoom();
     }
     public void StartScene()

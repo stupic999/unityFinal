@@ -65,6 +65,7 @@ public class MonsterWordController : MonoBehaviour {
         emyStat.currentHp -= damage;
         if (emyStat.currentHp <= 0)
         {
+            audioController.MonsterDie = true;
             MonsterTuturialDie tutorial = GetComponent<MonsterTuturialDie>();
             if (tutorial != null)
             {

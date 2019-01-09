@@ -19,7 +19,6 @@ public class ProtalToBossScene : MonoBehaviour
             DontDestroyOnLoad(Controller);
             DontDestroyOnLoad(Player);
             DontDestroyOnLoad(MainCamare);
-            MainCamare.orthographicSize = 12;
             DontDestroyOnLoad(UI);
             DontDestroyOnLoad(MonsterRoot);
             Player.transform.position = new Vector3(-13, 0, -13);

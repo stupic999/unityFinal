@@ -126,6 +126,7 @@ public class MonsterController : MonoBehaviour
         emyStat.currentHp -= damage;
         if (emyStat.currentHp<= 0)
         {
+            audioController.MonsterDie = true;
             gameObject.SetActive(false);
             Alive = false;
             monsterSearch.monsterDie = true;

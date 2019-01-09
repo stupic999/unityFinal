@@ -6,8 +6,12 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class GameController : MonoBehaviour {
 
+
+
     public static float LoveFireCD;
     public static bool LoadLoveCD;
+
+    public static bool LoadPlayerHp;
 
     AudioSource audioSource;
 
@@ -328,6 +332,13 @@ public class GameController : MonoBehaviour {
     {
         Save save = new Save();
 
+        save.gunWords = GetWords.gunWords;
+        save.bowWords = GetWords.bowWords;
+        save.panWords = GetWords.panWords;
+        save.ironWords = GetWords.ironWords;
+        save.loveWords = GetWords.loveWords;
+        save.laserWords = GetWords.laserWords;
+
         save.LoveFireCD = LoveFireCD;
 
         save.PlayerPositionX = Player.transform.position.x;
@@ -521,6 +532,13 @@ public class GameController : MonoBehaviour {
             Player.transform.position = new Vector3(save.PlayerPositionX, 0, save.PlayerPositionZ);
             Player.transform.rotation = new Quaternion(0, save.PlayerRotationY, 0, 0);
 
+            GetWords.gunWords = save.gunWords;
+            GetWords.bowWords = save.bowWords;
+            GetWords.panWords = save.panWords;
+            GetWords.ironWords = save.ironWords;
+            GetWords.loveWords = save.loveWords;
+            GetWords.laserWords = save.laserWords;
+
             LoveFireCD = save.LoveFireCD;
             LoadLoveCD = true;
 
@@ -559,6 +577,7 @@ public class GameController : MonoBehaviour {
             mainRoomStarted = save.mainRoomStarted;
 
             playerHp = save.playerHp;
+            LoadPlayerHp = true;
             isLoadHp = true;
 
             if (save.MonsterTAlive == false)

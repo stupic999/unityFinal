@@ -39,12 +39,12 @@ public class GetWords : MonoBehaviour {
     public static bool gotS;
 
     // 每个武器的字母数量
-    int gunWords=2;
-    int bowWords=1;
-    int panWords=2;
-    int ironWords=2;
-    int loveWords=3;
-    int laserWords = 3;
+    public static int gunWords=2;
+    public static int bowWords =1;
+    public static int panWords =2;
+    public static int ironWords =2;
+    public static int loveWords =3;
+    public static int laserWords = 3;
     public static int GunWords;
     public static int BowWords;
     public static int PanWords;

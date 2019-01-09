@@ -16,7 +16,7 @@ public class MonsterSearch : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (monsterChase.foundPlayer == false)
+        if (monsterChase != null && monsterChase.foundPlayer == false )
         {
             if (monsterDie == false)
             {

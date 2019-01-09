@@ -5,6 +5,13 @@ using UnityEngine;
 [System.Serializable]
 public class Save
 {
+    public int gunWords;
+    public int bowWords;
+    public int panWords;
+    public int ironWords;
+    public int loveWords;
+    public int laserWords;
+
     public float LoveFireCD;
 
     public float PlayerPositionX;

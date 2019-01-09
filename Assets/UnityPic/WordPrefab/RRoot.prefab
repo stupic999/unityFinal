@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue:
-    name: B
+    name: R
     sentences:
     - "\u4ECE\u602A\u7269\u6B7B\u6389\u6D88\u5931\u540E\uFF0C\u6389\u51FA\u6765\u4E00\u4E2A\u5B57\u6BCD"
     - "\u6361\u8D77\u6765\u4E00\u770B\uFF0C\u662F\u201CR\u201D\uFF0C\u628A\u5B83\u653E\u8FDB\u80CC\u5305"

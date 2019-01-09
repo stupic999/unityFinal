@@ -65,10 +65,11 @@ public class PlayerController : MonoBehaviour {
             playerHp.SetHealth(playerStat.currentHp, playerStat.maxHp);
         }
 
-        if (GameController.isLoadHp == true)
+        if (GameController.LoadPlayerHp == true)
         {
             playerStat.currentHp = GameController.playerHp;
             playerHp.SetHealth(playerStat.currentHp, playerStat.maxHp);
+            GameController.LoadPlayerHp = false;
         }
 
         if (GameController.isPause != true && GameController.isMenu != true && GameController.bagIsOpen != true)
